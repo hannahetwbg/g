@@ -1,0 +1,21 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        prefix = ""
+        length = len(strs)
+        if length == 0:
+            return prefix
+        elif length == 1:
+            return strs[0]
+        short = strs[0]
+        for i in range(1,length):
+            if len(short) > len(strs[i]):
+                short = strs[i]
+        for i in range(len(short)):
+            for j in range(length):
+                if strs[j][i] != short[i]:
+                    return prefix
+            prefix += short[i]
+        return prefix
+        
+        
+find shortest first
