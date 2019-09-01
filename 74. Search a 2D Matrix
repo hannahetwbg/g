@@ -1,0 +1,35 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        if not matrix or not matrix[0] or len(matrix) == 0:
+            return False
+        row = len(matrix)
+        start = 0
+        end = row -1
+        while start+1 < end:
+            mid = (start+end)//2
+            if matrix[mid][0] == target:
+                return True
+            elif matrix[mid][0] < target:
+                start = mid
+            else:
+                end = mid - 1
+        if matrix[end][0] <= target:
+            return self.binary_search(matrix[end],target)
+        else:
+            return self.binary_search(matrix[start],target)
+    def binary_search(self,lst,target):
+        if len(lst) == 1:
+            return lst[0] == target
+        start = 0
+        end = len(lst)-1
+        while start+1 < end:
+            mid = (start+end)//2
+            if lst[mid] == target:
+                return True
+            elif lst[mid] < target:
+                start = mid+1
+            else:
+                end = mid-1
+        if lst[start] == target or lst[end] == target:
+            return True
+        return False
